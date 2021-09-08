@@ -36,17 +36,19 @@ const validarId = async id => {
 }
 
 const validateFile = (req, res, next) => {
-
-    if ( req.files.libro === undefined || req.files.portada === undefined){
+    
+    if ( req.files === null || req.files.libro === undefined || req.files.portada === undefined){
         return res.status(500).json({
             msg: 'La portada y el libro son requeridos'
         });
     }
+    
+    const {portada, libro} = req.files;
 
     const extensions = ['jpg', 'png', 'jpeg', "pdf"];
 
-    const libroExtension = req.files.libro.mimetype.split('/').pop();
-    const portadaExtension = req.files.portada.mimetype.split('/').pop();
+    const libroExtension = libro.mimetype.split('/').pop();
+    const portadaExtension = portada.mimetype.split('/').pop();
 
     if(!extensions.includes(libroExtension)){
         return res.status(500).json({
