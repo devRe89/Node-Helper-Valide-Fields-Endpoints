@@ -5,7 +5,7 @@ const {validaCampos, mostrarError, validateFile} = require('../helpers/valida-ca
 const router = Router();
 
 router.post('/',
-    // validaCampos('crear-libro'),
+    // validaCampos('create-book'),
     // mostrarError,
     validateFile,
     apiController.getPrueba

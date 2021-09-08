@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const validaCampos = endpoint => {
     switch(endpoint){
-        case 'registro':
+        case 'create-user':
             return [
                 check('email', 'El Mail no es valido').isEmail(),
                 check('nickname', 'El campo nickname es requerido').not().isEmpty(),
@@ -12,16 +12,19 @@ const validaCampos = endpoint => {
                 check('edad', 'La edad es un campo numerico').isNumeric(),
                 check('password', 'La contraseña debe tener un minimo de 6 caracteres').isLength({min:6})
             ]
-        case 'sesion': 
+        case 'sesion-user': 
             return[
                 check('email', 'El Mail no es valido').isEmail(),
                 check('password', 'La contraseña debe tener un minimo de 6 caracteres').isLength({min:6})
             ]
-        case 'crear-libro': 
+        case 'update-book':    
+        case 'create-book': 
             return[
                 check('nombre', 'El nombre del libro es requerido').not().isEmpty(),
                 check('descripcion', 'La descripción en requerida').not().isEmpty(),
-                check('creador').custom((creador) => validarId(creador))
+                check('creador').custom((creador) => validarId(creador)),
+                check('precio', 'El precio es requerido').not().isEmpty(),
+                check('stock', 'El stock es requerido').not().isEmpty()
             ]
         default:
             return;
