@@ -1,12 +1,13 @@
 const {Router} = require('express');
 const apiController = require('../controllers/apiController');
-const {validaCampos, mostrarError} = require('../helpers/valida-campos');
+const {validaCampos, mostrarError, validateFile} = require('../helpers/valida-campos');
 
 const router = Router();
 
-router.get('/',
-    validaCampos('registro'),
-    mostrarError,
+router.post('/',
+    // validaCampos('crear-libro'),
+    // mostrarError,
+    validateFile,
     apiController.getPrueba
 );
 
